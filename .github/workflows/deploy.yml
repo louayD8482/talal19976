@@ -24,8 +24,11 @@ jobs:
       - name: Build Web Assets
         run: npm run build
 
-      - name: Setup Bun (if needed)
-        uses: oven-sh/setup-bun@v1
+      - name: Install Capacitor CLI
+        run: npm install @capacitor/cli @capacitor/core @capacitor/ios
+
+      - name: Add Capacitor iOS Platform
+        run: npx cap add ios
 
       - name: Sync Capacitor iOS
         run: npx cap sync ios
