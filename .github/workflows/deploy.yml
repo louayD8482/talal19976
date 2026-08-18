@@ -35,5 +35,12 @@ jobs:
 
       - name: Build iOS App Archive
         run: |
-          cd ios/App || cd ios
-          xcodebuild -workspace *.xcworkspace -scheme App -configuration Release -archivePath build/App.xcarchive archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+          cd ios
+          if [ -d "App" ]; then cd App; fi
+          WORKSPACE=$(ls -d *.xcworkspace 2>/dev/null | head -n 1)
+          if [ -z "$WORKSPACE" ]; then
+            PROJECT=$(ls -d *.xcodeproj 2>/dev/null | head -n 1)
+            xcodebuild -project "$PROJECT" -scheme App -configuration Release -archivePath build/App.xcarchive archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+          else
+            xcodebuild -workspace "$WORKSPACE" -scheme App -configuration Release -archivePath build/App.xcarchive archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+          fi
