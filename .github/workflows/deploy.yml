@@ -21,7 +21,7 @@ jobs:
       run: npm install
 
     - name: Build Web Assets
-      run: npm run build
+      run: npx vite build
 
     - name: Verify Build Output
-      run: ls -la dist  ls -la build  ls -la
+      run: ls -la dist || ls -la build || ls -la
