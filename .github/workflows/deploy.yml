@@ -23,5 +23,5 @@ jobs:
     - name: Build Web Assets
       run: npm run build
 
-    - name: List Files for Verification
-      run: ls -la
+    - name: Verify Build Output
+      run: ls -la dist  ls -la build  ls -la
