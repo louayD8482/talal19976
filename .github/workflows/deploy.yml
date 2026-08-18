@@ -44,3 +44,9 @@ jobs:
           else
             xcodebuild -workspace "$WORKSPACE" -scheme App -configuration Release -archivePath build/App.xcarchive archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
           fi
+
+      - name: Upload iOS Archive Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-archive
+          path: ios/build/App.xcarchive
